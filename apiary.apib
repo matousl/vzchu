@@ -5,6 +5,26 @@ HOST: http://webgis.nature.cz/aopkrest/Vzchu/
 
 Rozhraní pro získávání informací o **Velkoplošných chráněných územích ČR (VZCHÚ)**.
 
+## VZCHÚ - filtrování dle názvu [/filter/{pattern}?f={f}]
+
++ Parameters
+    + pattern: Český (string, optional) - řetězec pro vyhledání
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+    + Attributes
+        + SeznamLokalit (LokalitaVZCHU)
+        + SeznamLokalit (LokalitaVZCHU)
+        + SeznamLokalit (LokalitaVZCHU)
+
+
 ## VZCHÚ - karta dle ID [/{kod}?f={f}]
 
 + Parameters
@@ -22,44 +42,7 @@ Rozhraní pro získávání informací o **Velkoplošných chráněných území
 + Response 200 (application/json)
     + Attributes (LokalitaVZCHU)
 
-## VZCHÚ - filtrování dle názvu [/filter/{pattern}?f={f}]
-
-+ Parameters
-    + pattern: Český (string, optional) - řetězec pro vyhledání
-    + f (string, optional) - formát výstupu
-        + Default: html
-        + Members
-            + json
-            + html
-            + xml
-
-            
-### Přehled dotazů [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "Kod": 22,
-                "Nazev": "Český kras",
-                "Kategorie": "CHKO",
-                "IdAopkOop": 85
-            },
-            {
-                "Kod": 44,
-                "Nazev": "Český les",
-                "Kategorie": "CHKO",
-                "IdAopkOop": 82
-            },
-            {
-                "Kod": 63,
-                "Nazev": "Český ráj",
-                "Kategorie": "CHKO",
-                "IdAopkOop": 86
-            }
-        ]
         
-
 ## VZCHÚ - přehled změn [/updateinfo?f={f}]
 
 + Parameters
@@ -75,24 +58,13 @@ Rozhraní pro získávání informací o **Velkoplošných chráněných území
 
 + Response 200 (application/json)
 
-        [
-            {
-                "Kod": 63,
-                "IdAopkOop": 86,
-                "ZmenaT": "2019-01-09",
-                "ZmenaG": "2019-01-10"
-            },
-            {
-                "Kod": 44,
-                "IdAopkOop": 82,
-                "ZmenaT": "2019-01-09",
-                "ZmenaG": "2019-01-10"
-            }
-        ]
-
+    + Attributes
+        + SeznamZmen (ZmenaVZCHU)
+        + SeznamZmen (ZmenaVZCHU)
 
 
 # Data structures
+
 
 ## LokalitaVZCHU
 + Kod: 63 (number) - kód lokality v ústředním seznamu ochrany přírody
@@ -100,4 +72,10 @@ Rozhraní pro získávání informací o **Velkoplošných chráněných území
 + Kategorie: CHKO (enum [string]) - kategorie chráněného území
     + Members
     + CHKO - Chráněná krajinná oblast
-+ IdAopkOop: 86 (number) - ID Regionálního pracoviště AOPK ČR
++ IdAopkOop: 86 (number) - ID Regionálního pracoviště AOPK ČR !!!!Zkontrolovat!!!!
+
+## ZmenaVZCHU
++ Kod: 63 (number) - kód lokality v ústředním seznamu ochrany přírody
++ IdAopkOop: 86 (number) - ID Regionálního pracoviště AOPK ČR !!!!Zkontrolovat!!!!
++ ZmenaT: `2019-01-09` (string) - datum poslední změny tabelárních dat lokality
++ ZmenaG: `2019-01-10` (string) - datum poslední změny zákresu lokality
